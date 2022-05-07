@@ -2,7 +2,15 @@
 
 pragma solidity ^0.8.0;
 
-contract Campaign {
+contract Campaign { 
+    
+    struct Request {
+        string description;
+        uint value;
+        address recipient;
+        bool complete;
+    }
+
     address public manager;
     uint public minimumContribution;
     address[] public approvers;
