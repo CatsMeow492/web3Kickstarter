@@ -50,10 +50,10 @@ contract Campaign {
         Request storage request = requests[index];
 
         require(approvers[msg.sender]);
-        require(!requests[index].approvals[msg.sender]);
+        require(!request.approvals[msg.sender]);
 
-        requests[index].approval[msg.sender] = true;
-        requests[index].approvalCount++;
+        request.approval[msg.sender] = true;
+        request.approvalCount++;
     }
 
 }
