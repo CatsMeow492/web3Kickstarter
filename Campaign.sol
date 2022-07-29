@@ -12,6 +12,7 @@ contract Campaign {
         bool complete;
         uint approvalCount;
         mapping(address => bool) approvals;
+        uint public approversCount;
     }
 
     address public manager;
@@ -31,6 +32,8 @@ contract Campaign {
     function contribute() public payable {
         require(msg.value > minimumContribution);
         approvers.push(msg.sender);
+
+        approversCount++;
     }
 
     function createRequest(string description, uint value, address recipient) 
@@ -54,6 +57,16 @@ contract Campaign {
 
         request.approval[msg.sender] = true;
         request.approvalCount++;
+    }
+    
+    function finalizeRequest(uint index) public restricted {
+        Request storage request = requests[index];
+
+        require(request.approvalCount > (approversCount / 2));
+        require(!request.complete);
+
+        request.recipient.transfer(request.value);
+        request.complete = true;
     }
 
 }
