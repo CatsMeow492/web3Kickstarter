@@ -2,6 +2,15 @@
 
 pragma solidity ^0.8.0;
 
+contract CampaignFactory {
+    address[] public deployedCampaigns;
+
+    function createCampaign(uint minimum) public {
+        new Campaign(minimum);
+        deployedCampaigns.push(newCampaign);
+    }
+}
+
 contract Campaign { 
     
     struct Request {
