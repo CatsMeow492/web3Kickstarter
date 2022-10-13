@@ -25,7 +25,7 @@ contract Campaign {
         bool complete;
         uint approvalCount;
         mapping(address => bool) approvals;
-        uint public approversCount;
+        uint approversCount;
     }
 
     address public manager;
